@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->group(function(){
     Route::get('/threads', [ThreadController::class, 'index']);
     Route::post('/create/thread', [ThreadController::class, 'store']);
+    Route::post('/thread/like/{thread_id}', [ThreadController::class, 'react']);
+    
 });
 
 Route::post('/register', [AuthenticationController::class, 'register']);
