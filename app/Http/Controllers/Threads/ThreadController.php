@@ -4,10 +4,26 @@ namespace App\Http\Controllers\Threads;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ThreadRequest;
+use App\Models\Thread;
 use Illuminate\Http\Request;
 
 class ThreadController extends Controller
 {
+    public function index()
+    {
+        try {
+            $threads = Thread::latest()->get();
+            return response([
+                'threads' => $threads
+            ]);
+        } catch (\Exception $e) {
+            return response([
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+
     public function store(ThreadRequest $threadRequest)
     {
         try {
